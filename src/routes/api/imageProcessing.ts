@@ -1,6 +1,5 @@
 import express from 'express';
-// import getMetadata from '../../utilities/metadata';
-import { paramValidator, dirExist } from '../../utilities/validator';
+import { paramValidator, dirExist, isCached } from '../../utilities/validator';
 import imageResize from '../../utilities/imageResize';
 import path from 'path';
 
@@ -12,6 +11,7 @@ imageProcessing.get('/', (req, res) => {
     const resizeImage = async () => {
         try {
             if (validatedData[0]) {
+                // condition when request is valid and has parameters
                 if (validatedData[1] != 'INDEX') {
                     const fileName: string = req.query.filename as string;
                     const imgWidth: number = parseInt(req.query.width as string);
@@ -26,12 +26,24 @@ imageProcessing.get('/', (req, res) => {
                         __dirname,
                         '../../../assets/images/thumb/'
                     );
-                    dirExist(thumbImagesDir);
                     const thumbImagePath = `${thumbImagesDir}/${fileName}_${imgWidth}_${imgHeight}.jpg`;
-                    await imageResize(fullImagePath, imgWidth, imgHeight, thumbImagePath);
-                    res.json({
-                        message: `image path:${fullImagePath}, width: ${imgWidth}, height: ${imgHeight}`
-                    });
+                    if (isCached(thumbImagePath)) {
+                        res.write('<html>');
+                        res.write('<body>');
+                        res.write(`<img src="thumb/${fileName}_${imgWidth}_${imgHeight}.jpg">`);
+                        res.write('</body>');
+                        res.write('</html>');
+                        res.end();
+                    } else {
+                        dirExist(thumbImagesDir);
+                        await imageResize(fullImagePath, imgWidth, imgHeight, thumbImagePath);
+                        res.write('<html>');
+                        res.write('<body>');
+                        res.write(`<img src="thumb/${fileName}_${imgWidth}_${imgHeight}.jpg">`);
+                        res.write('</body>');
+                        res.write('</html>');
+                        res.end();
+                    }
                 } else {
                     res.send('Add image, width and height parameters to url');
                 }
