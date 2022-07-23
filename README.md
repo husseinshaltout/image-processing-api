@@ -55,12 +55,8 @@ To build, run the following command
 
 ## Usage/Examples
 
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
+```bash
+http://localhost:3000/api/images?filename=fjord&width=50&height=50
 ```
 
 
