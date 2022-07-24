@@ -9,4 +9,10 @@ describe('Image processing endpoint test suite', () => {
         const response: supertest.Response = await request.get(routePath);
         expect(response.status).toBe(200);
     });
+    it('should perform GET with image resize params and response be 200', async (): Promise<void> => {
+        const response: supertest.Response = await request.get(
+            `${routePath}?filename?=fjord&width=20&height=20`
+        );
+        expect(response.status).toBe(200);
+    });
 });
