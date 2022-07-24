@@ -16,7 +16,6 @@
   "author": "Hussein Shaltout",
   "license": "ISC",
   "dependencies": {
-    "@types/sharp": "^0.30.4",
     "dotenv": "^10.0.0",
     "express": "^4.18.1",
     "morgan": "^1.10.0",
@@ -27,6 +26,7 @@
     "@types/jasmine": "^3.10.2",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.11.45",
+    "@types/sharp": "^0.30.4",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",

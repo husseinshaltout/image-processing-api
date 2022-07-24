@@ -34,7 +34,6 @@ const paramValidator = (request: express.Request): [boolean, string] => {
     /**
      * validates request
      * @param {express.Request} request
-     * @param {number} b
      * @returns {[boolean, string]} false if invalid request and string: showing error message
      */
     try {

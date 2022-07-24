@@ -5,10 +5,10 @@ import path from 'path';
 
 const imageProcessing = express.Router();
 
-imageProcessing.get('/', (req, res) => {
+imageProcessing.get('/', (req: express.Request, res: express.Response): void => {
     const validatedData = paramValidator(req);
 
-    const resizeImage = async () => {
+    const resizeImage = async (): Promise<void> => {
         try {
             if (validatedData[0]) {
                 // condition when request is valid and has parameters

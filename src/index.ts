@@ -15,13 +15,12 @@ const publicDir: string = path.resolve(__dirname, '../assets/images/');
 app.use(morgan('combined'));
 app.use('/api', express.json(), express.static(publicDir), routes);
 // add routing for / path
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response): void => {
     res.send('Home');
 });
 
 // start express server
 app.listen(PORT, () => {
-    // eslint-disable-next-line no-console
     console.log(`Server is starting at http://localhost:${PORT}`);
 });
 
